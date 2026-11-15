@@ -6,7 +6,7 @@
 <title>广州 3 日独行手册</title>
 <style>
     :root {
-        --bg: #f5f7fa;
+        --bg: #f4f7f6;
         --card-bg: #ffffff;
         --text: #2c3e50;
         --text-muted: #7f8c8d;
@@ -17,6 +17,8 @@
         --border: #e1e8ed;
         --highlight-bg: #fff3cd;
         --highlight-text: #856404;
+        --water: #d4e6f1;
+        --road: #ecf0f1;
     }
     [data-theme="dark"] {
         --bg: #121212;
@@ -30,25 +32,50 @@
         --border: #333333;
         --highlight-bg: #4a3e00;
         --highlight-text: #ffd54f;
+        --water: #1a2a3a;
+        --road: #2a2a2a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         background-color: var(--bg);
         color: var(--text);
         line-height: 1.6;
-        padding: 16px;
         max-width: 600px;
         margin: 0 auto;
+        padding-bottom: 40px;
         transition: background-color 0.3s, color 0.3s;
     }
     h1, h2, h3 { color: var(--text); font-weight: 600; }
+    
+    /* 顶部导航 */
+    .top-nav {
+        position: sticky;
+        top: 0;
+        background: var(--card-bg);
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .top-nav a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .top-nav a:active { color: var(--primary); }
+
+    .container { padding: 16px; }
     .card {
         background: var(--card-bg);
         border-radius: 12px;
         padding: 16px;
         margin-bottom: 16px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         border: 1px solid var(--border);
     }
     .text-sm { font-size: 0.85rem; color: var(--text-muted); }
@@ -57,45 +84,43 @@
         color: var(--highlight-text);
         padding: 12px;
         border-radius: 8px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         margin: 12px 0;
         border-left: 4px solid #ffc107;
     }
-    /* 顶部倒计时 */
+    
+    /* 倒计时 */
     .countdown-card {
         text-align: center;
         background: linear-gradient(135deg, var(--primary), #c0392b);
         color: white;
         border: none;
+        margin: 16px;
     }
     .countdown-card h2, .countdown-card p { color: white; }
-    .timer {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 12px;
-    }
+    .timer { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
     .timer-unit {
         background: rgba(255,255,255,0.2);
-        padding: 8px 12px;
+        padding: 6px 10px;
         border-radius: 8px;
-        min-width: 60px;
+        min-width: 55px;
     }
-    .timer-val { font-size: 1.5rem; font-weight: bold; }
+    .timer-val { font-size: 1.4rem; font-weight: bold; }
     .timer-label { font-size: 0.7rem; opacity: 0.8; }
     
-    /* 地图与列表 */
-    .map-container {
+    /* 地图 */
+    .map-wrapper {
         width: 100%;
-        height: 200px;
-        background: #eef2f5;
+        background: var(--road);
         border-radius: 8px;
         margin-bottom: 12px;
-        position: relative;
         overflow: hidden;
+        position: relative;
+        border: 1px solid var(--border);
     }
-    [data-theme="dark"] .map-container { background: #2a2a2a; }
-    svg { width: 100%; height: 100%; }
+    svg { display: block; width: 100%; height: auto; }
+    .map-label { font-size: 10px; fill: var(--text-muted); font-weight: bold; }
+    .map-point { stroke: var(--card-bg); stroke-width: 2; }
     
     /* 行程 */
     .day-header {
@@ -107,49 +132,78 @@
         border-bottom: 2px solid var(--border);
         margin-bottom: 12px;
     }
-    .day-title { font-size: 1.1rem; font-weight: bold; }
     .day-1 .day-title { color: var(--day1); }
     .day-2 .day-title { color: var(--day2); }
     .day-3 .day-title { color: var(--day3); }
-    .route-content { display: none; margin-top: 12px; }
-    .route-content.active { display: block; }
     
-    .timeline { position: relative; padding-left: 20px; }
+    .timeline { position: relative; padding-left: 20px; margin-top: 16px;}
     .timeline::before {
-        content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+        content: ''; position: absolute; left: 4px; top: 0; bottom: 0;
         width: 2px; background: var(--border);
     }
-    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item { position: relative; margin-bottom: 20px; }
     .timeline-item::before {
-        content: ''; position: absolute; left: -24px; top: 6px;
+        content: ''; position: absolute; left: -20px; top: 6px;
         width: 10px; height: 10px; border-radius: 50%; background: var(--primary);
+        border: 2px solid var(--card-bg);
     }
-    .time { font-weight: bold; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px; }
+    .time { font-weight: bold; font-size: 0.9rem; color: var(--primary); margin-bottom: 4px; }
     .location-btn {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         background: var(--border);
         color: var(--text);
         text-decoration: none;
-        padding: 4px 8px;
-        border-radius: 4px;
+        padding: 6px 10px;
+        border-radius: 6px;
         font-size: 0.8rem;
-        margin-top: 4px;
-        border: 1px solid var(--border);
+        margin-top: 8px;
+        font-weight: 500;
     }
-    .location-btn:active { opacity: 0.7; }
     
-    /* 列表样式 */
+    /* 方案对比 */
+    .plan-tabs { display: flex; gap: 10px; margin-bottom: 12px; }
+    .plan-tab {
+        flex: 1; text-align: center; padding: 8px; border-radius: 6px; 
+        background: var(--border); cursor: pointer; font-size: 0.9rem; font-weight: bold;
+    }
+    .plan-tab.active { background: var(--primary); color: white; }
+    .plan-content { display: none; }
+    .plan-content.active { display: block; }
+
+    /* 清单 */
     ul { list-style-position: inside; padding-left: 0; }
-    li { margin-bottom: 8px; }
-    .booking-info p { margin-bottom: 8px; }
+    li { margin-bottom: 10px; }
+    input[type="checkbox"] { margin-right: 8px; transform: scale(1.2); }
     
-    /* 待办清单（纯列表） */
-    .todo-list li::marker { color: var(--primary); }
+    /* 旅行前准备 */
+    .prep-input-group { display: flex; gap: 8px; margin-bottom: 16px; }
+    .prep-input-group input {
+        flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+        background: var(--bg); color: var(--text); outline: none;
+    }
+    .prep-input-group button {
+        padding: 10px 16px; border-radius: 8px; border: none;
+        background: var(--text); color: var(--bg); font-weight: bold; cursor: pointer;
+    }
+    .prep-list { list-style: none; }
+    .prep-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .prep-item label { display: flex; align-items: center; cursor: pointer; }
+    .prep-delete { background: none; border: none; color: #e74c3c; font-size: 0.85rem; cursor: pointer; }
+    .prep-counter { font-size: 0.85rem; color: var(--text-muted); text-align: right; margin-bottom: 8px; }
 </style>
 </head>
 <body>
 
-<!-- 顶部此刻关注 -->
+<!-- 顶部目录 -->
+<nav class="top-nav">
+    <a href="#flights">航班</a>
+    <a href="#routes">路线</a>
+    <a href="#itinerary">行程</a>
+    <a href="#todo">To Do</a>
+</nav>
+
+<!-- 顶部倒计时 -->
 <div class="card countdown-card" id="countdownCard">
     <h2 id="nextEvent">加载中...</h2>
     <p class="text-sm" id="nextEventTime" style="opacity: 0.9;"></p>
@@ -161,183 +215,283 @@
     </div>
 </div>
 
-<!-- 行程总览地图 -->
-<div class="card">
-    <h2>行程总览地图</h2>
-    <div class="map-container">
-        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-            <!-- 手绘感背景 -->
-            <path d="M20,160 Q150,180 280,150" fill="none" stroke="#bdc3c7" stroke-width="2" stroke-dasharray="4,4"/>
-            <path d="M50,20 Q150,40 250,10" fill="none" stroke="#bdc3c7" stroke-width="2" stroke-dasharray="4,4"/>
-            <!-- Day 1 路线 (蓝) -->
-            <path d="M40,30 L150,120 L220,100 L150,120" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
-            <!-- Day 2 路线 (绿) -->
-            <path d="M150,120 L120,140 L140,150 L220,110" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
-            <!-- Day 3 路线 (紫) -->
-            <path d="M150,120 L200,130 L230,150 L180,170 L40,30" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6,4"/>
-            <!-- 标记点 -->
-            <circle cx="40" cy="30" r="4" fill="var(--primary)"/><text x="45" y="25" font-size="10" fill="var(--text)">机场</text>
-            <circle cx="150" cy="120" r="4" fill="var(--primary)"/><text x="155" y="120" font-size="10" fill="var(--text)">民宿</text>
-            <circle cx="220" cy="100" r="4" fill="var(--day1)"/><text x="225" y="100" font-size="10" fill="var(--text)">越秀</text>
-            <circle cx="120" cy="140" r="4" fill="var(--day2)"/><text x="100" y="145" font-size="10" fill="var(--text)">沙面</text>
-            <circle cx="140" cy="150" r="4" fill="var(--day2)"/><text x="145" y="155" font-size="10" fill="var(--text)">永庆坊</text>
-            <circle cx="200" cy="130" r="4" fill="var(--day3)"/><text x="205" y="130" font-size="10" fill="var(--text)">省博</text>
-            <circle cx="230" cy="150" r="4" fill="var(--day3)"/><text x="235" y="150" font-size="10" fill="var(--text)">艺博</text>
-            <circle cx="180" cy="170" r="4" fill="var(--day3)"/><text x="185" y="175" font-size="10" fill="var(--text)">太古仓</text>
-        </svg>
-    </div>
-    <p class="text-sm" style="text-align:center">白天与黑夜自动切换配色 (GMT+8)</p>
-</div>
+<div class="container">
 
-<!-- 已确认信息 -->
-<div class="card">
-    <h2>已确认信息</h2>
-    <div class="booking-info">
-        <p><strong>✈️ 去程：</strong>11月16日 22:40 亚庇 T1 → <strong>11月17日 02:00 广州白云 T3</strong> (AK1532)</p>
-        <p><strong>✈️ 返程：</strong><strong>11月20日 03:05 广州白云 T3</strong> → 06:20 亚庇 T1 (AK1533)</p>
+    <!-- 总览地图 -->
+    <div class="card" id="routes">
+        <h2>行程总览地图</h2>
+        <div class="map-wrapper">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- 江河水系 (半透明) -->
+                <path d="M-20,100 C80,140 150,80 220,160 C280,220 350,180 420,220 L420,320 L-20,320 Z" fill="var(--water)" opacity="0.6"/>
+                <path d="M180,-20 C200,50 150,80 220,160" fill="none" stroke="var(--water)" stroke-width="15" opacity="0.6"/>
+                
+                <!-- 主要道路网格 -->
+                <path d="M50,50 L350,50 M100,100 L300,100 M50,150 L350,150 M50,200 L350,200" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/>
+                <path d="M100,20 L100,280 M200,20 L200,280 M300,20 L300,280" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/>
+
+                <!-- 地铁路线示意 -->
+                <path d="M80,20 L80,200 L250,200" fill="none" stroke="#ff9800" stroke-width="2" opacity="0.5"/>
+                <path d="M20,120 L380,120" fill="none" stroke="#f44336" stroke-width="2" opacity="0.5"/>
+
+                <!-- Day 1 (蓝) 越秀/天河 -->
+                <path d="M80,140 L150,100 L250,80" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
+                <!-- Day 2 (绿) 荔湾/海珠 -->
+                <path d="M120,160 L60,120 L100,180" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
+                <!-- Day 3 (紫) 珠江新城/海珠 -->
+                <path d="M250,80 L260,160 L150,240" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
+
+                <!-- 标记点 -->
+                <circle cx="80" cy="140" r="4" class="map-point" fill="var(--primary)"/><text x="85" y="145" class="map-label">民宿</text>
+                <circle cx="150" cy="100" r="4" class="map-point" fill="var(--day1)"/><text x="155" y="105" class="map-label">越秀公园</text>
+                <circle cx="250" cy="80" r="4" class="map-point" fill="var(--day1)"/><text x="255" y="85" class="map-label">体育西</text>
+                <circle cx="60" cy="120" r="4" class="map-point" fill="var(--day2)"/><text x="65" y="115" class="map-label">沙面/永庆坊</text>
+                <circle cx="260" cy="160" r="4" class="map-point" fill="var(--day3)"/><text x="265" y="165" class="map-label">省博/艺博</text>
+                <circle cx="150" cy="240" r="4" class="map-point" fill="var(--day3)"/><text x="155" y="245" class="map-label">太古仓</text>
+            </svg>
+        </div>
+        <p class="text-sm" style="text-align:center">蓝: Day1 | 绿: Day2 | 紫: Day3 (GMT+8)</p>
+    </div>
+
+    <!-- 航班与酒店 -->
+    <div class="card" id="flights">
+        <h2>航班与住宿</h2>
+        <div style="margin-bottom: 12px;">
+            <p><strong>✈️ 去程：</strong>11月16日 22:40 亚庇 T1 → <strong>11月17日 02:00 广州白云 T3</strong> (AK1532)</p>
+            <p><strong>✈️ 返程：</strong><strong>11月20日 03:05 广州白云 T3</strong> → 06:20 亚庇 T1 (AK1533)</p>
+        </div>
         <hr style="border-top: 1px solid var(--border); margin: 12px 0;">
-        <p><strong>🏠 住宿：</strong>海珠区蒙圣社区-3号门瑞仁八间</p>
-        <p class="text-sm">退房时间：11月19日 13:00（可免费寄存行李）</p>
-        <p><strong>🚗 接机：</strong>11月17日 02:30 - 02:45，T3 72号门网约车上客区</p>
+        <div>
+            <p><strong>🏠 住宿：</strong>海珠区蒙圣社区-3号门瑞仁八间 (地铁2号线市二宫站附近)</p>
+            <p class="text-sm">退房时间：11月19日 13:00（可免费寄存行李）</p>
+        </div>
+        <hr style="border-top: 1px solid var(--border); margin: 12px 0;">
+        <div>
+            <p style="color: var(--text-muted);"><strong>⏳ 未确认信息：</strong>接机顺风车（11月17日 02:30）目前尚未有车主接单，需持续关注。若无人接单，建议直接在机场打车。</p>
+        </div>
     </div>
-</div>
 
-<!-- 逐日行程 -->
-<div class="card day-1">
-    <div class="day-header" onclick="toggleRoute('day1-route')">
-        <span class="day-title">Day 1：11月17日（周二）</span>
-        <span class="text-sm">展开/收起路线地图 ▾</span>
-    </div>
-    <div id="day1-route" class="route-content">
-        <a href="https://uri.amap.com/navigation?to=23.138,113.261,南越王博物院王墓展区&mode=bus&callnative=1" class="location-btn">🧭 一键导航至南越王博物院</a>
-        <br><br>
-        <a href="https://uri.amap.com/navigation?to=23.133,113.321,Fat Boi Cocktail Bar&mode=bus&callnative=1" class="location-btn">🧭 一键导航至 Fat Boi</a>
-    </div>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="time">02:00 落地</div>
-            <div>白云机场 T3，前往 72 号门上车。</div>
+    <!-- 逐日行程 -->
+    <h2 style="margin-bottom: 12px;" id="itinerary">逐日行程</h2>
+    
+    <!-- Day 1 -->
+    <div class="card day-1">
+        <div class="day-header" onclick="toggleMap('map1')">
+            <span class="day-title">Day 1：11月17日（周二）</span>
+            <span class="text-sm" style="color:var(--day1)">展开地图 ▾</span>
         </div>
-        <div class="timeline-item">
-            <div class="time">03:00 入住</div>
-            <div>蒙圣社区民宿。附近有全家/7-11可买水。</div>
+        <div id="map1" class="map-wrapper" style="display:none;">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <rect width="300" height="150" fill="var(--bg)"/>
+                <path d="M0,100 L300,100" stroke="var(--border)" stroke-width="10"/>
+                <path d="M50,120 L100,70 L220,50" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                <circle cx="100" cy="70" r="4" fill="var(--day1)"/><text x="105" y="75" class="map-label">越秀公园</text>
+                <circle cx="220" cy="50" r="4" fill="var(--day1)"/><text x="225" y="55" class="map-label">体育西</text>
+            </svg>
         </div>
-        <div class="timeline-item">
-            <div class="time">下午</div>
-            <div><strong>南越王博物院（王墓展区）</strong></div>
-            <div class="highlight-box">
-                ⚠️ 持马来西亚护照：去人工窗口买 10 元大门票。<br>
-                💡 携程预约了“墓室下层”免费票的话，现场凭护照核验。如核验失败，直接放弃下层，只看主墓和陈列（不影响体验）。
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">02:00 落地</div>
+                <div>白云机场 T3。前往 72 号门上车，打车回民宿。</div>
+                <div class="highlight-box">
+                    凌晨安顿后若需买水/零食，可去附近 24 小时营业的<strong>旺我便利店</strong>。
+                    <br><a href="https://uri.amap.com/search?keyword=旺我便利店&callnative=1" class="location-btn">📍 导航至旺我便利店</a>
+                </div>
             </div>
-            <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德导航</a>
-        </div>
-        <div class="timeline-item">
-            <div class="time">晚上 20:00+</div>
-            <div><strong>Fat Boi Cocktail Bar</strong>（体育西路 A 口附近）</div>
-            <a href="https://uri.amap.com/search?keyword=FatBoiCocktailBar&callnative=1" class="location-btn">📍 唤起高德导航</a>
+            <div class="timeline-item">
+                <div class="time">11:00 - 12:00 自然醒</div>
+                <div>起床后去附近<strong>美士联便利店</strong>拿快递。</div>
+                <a href="https://uri.amap.com/search?keyword=美士联便利店&callnative=1" class="location-btn">📍 导航至美士联便利店</a>
+            </div>
+            <div class="timeline-item">
+                <div class="time">下午</div>
+                <div><strong>南越王博物院（王墓展区）</strong></div>
+                <div class="text-sm">地铁2号线越秀公园站E口，步行5分钟。</div>
+                <div class="highlight-box">
+                    ⚠️ 持马来西亚护照：去人工窗口买 10 元大门票。<br>
+                    💡 携程预约了“墓室下层”免费票的话，现场凭护照核验。如核验失败，直接放弃下层，只看主墓和陈列。
+                </div>
+                <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德导航</a>
+            </div>
+            <div class="timeline-item">
+                <div class="time">晚上 20:00+</div>
+                <div><strong>Fat Boi Cocktail Bar</strong></div>
+                <div class="text-sm">地铁3号线体育西路站A口，步行约750米。</div>
+                <a href="https://uri.amap.com/search?keyword=FatBoiCocktailBar&callnative=1" class="location-btn">📍 唤起高德导航</a>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="card day-2">
-    <div class="day-header" onclick="toggleRoute('day2-route')">
-        <span class="day-title">Day 2：11月18日（周三）</span>
-        <span class="text-sm">展开/收起路线地图 ▾</span>
-    </div>
-    <div id="day2-route" class="route-content">
-        <a href="https://uri.amap.com/navigation?to=23.109,113.243,沙面岛&callnative=1" class="location-btn">🧭 导航至沙面岛</a><br><br>
-        <a href="https://uri.amap.com/navigation?to=23.116,113.244,永庆坊&callnative=1" class="location-btn">🧭 导航至永庆坊</a><br><br>
-        <a href="https://uri.amap.com/navigation?to=23.119,113.326,Bricklane&callnative=1" class="location-btn">🧭 导航至 Bricklane</a>
-    </div>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="time">上午</div>
-            <div><strong>沙面岛</strong></div>
-            <div>露天历史建筑群，适合散步拍照。</div>
-            <a href="https://uri.amap.com/search?keyword=沙面岛&callnative=1" class="location-btn">📍 唤起高德导航</a>
+    <!-- Day 2 -->
+    <div class="card day-2">
+        <div class="day-header" onclick="toggleMap('map2')">
+            <span class="day-title">Day 2：11月18日（周三）</span>
+            <span class="text-sm" style="color:var(--day2)">展开地图 ▾</span>
         </div>
-        <div class="timeline-item">
-            <div class="time">下午</div>
-            <div><strong>永庆坊</strong></div>
-            <div>西关老街区，吃逛结合。</div>
-            <a href="https://uri.amap.com/search?keyword=永庆坊&callnative=1" class="location-btn">📍 唤起高德导航</a>
+        <div id="map2" class="map-wrapper" style="display:none;">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <rect width="300" height="150" fill="var(--bg)"/>
+                <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.5"/>
+                <path d="M80,80 L120,100 L250,60" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="80" cy="80" r="4" fill="var(--day2)"/><text x="85" y="85" class="map-label">沙面</text>
+                <circle cx="120" cy="100" r="4" fill="var(--day2)"/><text x="125" y="105" class="map-label">永庆坊</text>
+                <circle cx="250" cy="60" r="4" fill="var(--day2)"/><text x="255" y="65" class="map-label">珠江新城</text>
+            </svg>
         </div>
-        <div class="timeline-item">
-            <div class="time">傍晚</div>
-            <div><strong>珠江新城 Bricklane</strong></div>
-            <div>这日行程不赶，晚上喝酒顺路。</div>
-            <a href="https://uri.amap.com/search?keyword=Bricklane珠江新城&callnative=1" class="location-btn">📍 唤起高德导航</a>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">上午</div>
+                <div><strong>沙面岛</strong></div>
+                <div class="text-sm">地铁1号线/6号线黄沙站F口，或6号线/8号线文化公园站E口。</div>
+                <a href="https://uri.amap.com/search?keyword=沙面岛&callnative=1" class="location-btn">📍 唤起高德导航</a>
+            </div>
+            <div class="timeline-item">
+                <div class="time">下午</div>
+                <div><strong>永庆坊</strong></div>
+                <div class="text-sm">地铁1号线/6号线黄沙站B口，步行约10分钟。</div>
+                <a href="https://uri.amap.com/search?keyword=永庆坊&callnative=1" class="location-btn">📍 唤起高德导航</a>
+            </div>
+            <div class="timeline-item">
+                <div class="time">傍晚</div>
+                <div><strong>Bricklane</strong></div>
+                <div class="text-sm">地铁3号线/5号线珠江新城站B1口，步行约800米。</div>
+                <a href="https://uri.amap.com/search?keyword=Bricklane珠江新城&callnative=1" class="location-btn">📍 唤起高德导航</a>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="card day-3">
-    <div class="day-header" onclick="toggleRoute('day3-route')">
-        <span class="day-title">Day 3：11月19日（周四）</span>
-        <span class="text-sm">展开/收起路线地图 ▾</span>
-    </div>
-    <div id="day3-route" class="route-content">
-        <a href="https://uri.amap.com/navigation?to=23.118,113.325,广东省博物馆&callnative=1" class="location-btn">🧭 导航至广东省博物馆</a><br><br>
-        <a href="https://uri.amap.com/navigation?to=23.101,113.326,广州艺术博物院&callnative=1" class="location-btn">🧭 导航至广州艺术博物院</a><br><br>
-        <a href="https://uri.amap.com/navigation?to=23.086,113.257,太古仓码头&callnative=1" class="location-btn">🧭 导航至太古仓</a>
-    </div>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="time">09:00 - 11:15</div>
-            <div><strong>广东省博物馆</strong></div>
-            <div>已买特展票，直接凭票/码入馆。珠江新城站B1口。</div>
-            <a href="https://uri.amap.com/search?keyword=广东省博物馆&callnative=1" class="location-btn">📍 唤起高德导航</a>
+    <!-- Day 3 -->
+    <div class="card day-3">
+        <div class="day-header">
+            <span class="day-title">Day 3：11月19日（周四）</span>
         </div>
-        <div class="timeline-item">
-            <div class="time">13:00 前</div>
-            <div><strong>回民宿退房</strong>（地铁 2 号线市二宫）</div>
-            <div>行李可免费寄存在民宿。</div>
+        <div class="plan-tabs">
+            <div class="plan-tab active" onclick="switchPlan('planA')">方案 A (早省博)</div>
+            <div class="plan-tab" onclick="switchPlan('planB')">方案 B (早起退房)</div>
         </div>
-        <div class="timeline-item">
-            <div class="time">下午</div>
-            <div><strong>广州艺术博物院新馆</strong></div>
-            <div>赤岗塔站B口，免费免预约。17:00 停止入场，5楼阳台可拍广州塔。</div>
-            <a href="https://uri.amap.com/search?keyword=广州艺术博物院&callnative=1" class="location-btn">📍 唤起高德导航</a>
+        
+        <!-- 方案A -->
+        <div id="planA" class="plan-content active">
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="120" fill="var(--bg)"/>
+                    <path d="M50,60 L150,40 L200,90" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="60" r="4" fill="var(--primary)"/><text x="55" y="65" class="map-label">民宿</text>
+                    <circle cx="150" cy="40" r="4" fill="var(--day3)"/><text x="155" y="45" class="map-label">省博</text>
+                    <circle cx="200" cy="90" r="4" fill="var(--day3)"/><text x="205" y="95" class="map-label">艺博/太古仓</text>
+                </svg>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time">08:30 - 11:15</div>
+                    <div><strong>广东省博物馆</strong>（凭特展票入馆）</div>
+                    <div class="text-sm">地铁5号线珠江新城站B1口，或APM线大剧院站E口。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">11:15 - 13:00</div>
+                    <div>回民宿退房。行李寄存在民宿。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">下午</div>
+                    <div><strong>广州艺术博物院新馆</strong>（免费，免预约）</div>
+                    <div class="text-sm">APM线赤岗塔站B口，17:00停止入场。</div>
+                </div>
+            </div>
         </div>
-        <div class="timeline-item">
-            <div class="time">晚上</div>
-            <div><strong>太古仓码头 (暂定/待定)</strong></div>
-            <div>目前只计划沿江散步。若不坐船，时间完全自由；若坐船需注意时间。</div>
-            <a href="https://uri.amap.com/search?keyword=太古仓码头&callnative=1" class="location-btn">📍 唤起高德导航</a>
-        </div>
-        <div class="timeline-item">
-            <div class="time">22:30</div>
-            <div><strong>回民宿取行李</strong>，23:30 前打车出发去白云机场 T3（车程约 50 分钟）。</div>
-        </div>
-    </div>
-</div>
 
-<!-- 待办清单 -->
-<div class="card">
-    <h2>待办清单（纯列表）</h2>
-    <ul class="todo-list">
-        <li><strong>今晚 22:00：</strong>抢 19 日广东省博物馆的普通票（如已买特展票，此项转为确认状态）。</li>
-        <li><strong>16 日中午 12:00 前：</strong>微信跟房东确认 17 日凌晨 2 点能顺利拿钥匙入住。</li>
-        <li><strong>16 日：</strong>尝试在携程用马来西亚护照预约南越王“墓室下层”免费票。</li>
-        <li><strong>17 日：</strong>前往南越王博物院，带护照原件，走人工窗口买 10 元票。</li>
-        <li><strong>19 日：</strong>确定晚上太古仓的具体安排（是否坐船），如果不坐船就不改，直接散步。</li>
-    </ul>
-</div>
+        <!-- 方案B -->
+        <div id="planB" class="plan-content">
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="120" fill="var(--bg)"/>
+                    <path d="M50,60 L150,40 L200,90" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="60" r="4" fill="var(--primary)"/><text x="55" y="65" class="map-label">退房后出发</text>
+                    <circle cx="150" cy="40" r="4" fill="var(--day3)"/><text x="155" y="45" class="map-label">省博</text>
+                    <circle cx="200" cy="90" r="4" fill="var(--day3)"/><text x="205" y="95" class="map-label">艺博/太古仓</text>
+                </svg>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time">08:30 - 09:00</div>
+                    <div>早起退房，将行李寄存在民宿。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">09:00 - 12:00</div>
+                    <div><strong>广东省博物馆</strong></div>
+                    <div class="text-sm">地铁5号线珠江新城站B1口。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">中午</div>
+                    <div>在省博或艺博院附近吃午饭。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">下午</div>
+                    <div><strong>广州艺术博物院新馆</strong></div>
+                </div>
+            </div>
+        </div>
 
-<!-- 实用贴士 -->
-<div class="card">
-    <h2>实用贴士</h2>
-    <ul>
-        <li><strong>证件：</strong>马来西亚护照随身带，买票、入住、高铁均需原件。</li>
-        <li><strong>行李：</strong>19日退房后寄存在民宿，轻装去逛艺博院和太古仓。回程前记得去取。</li>
-        <li><strong>交通：</strong>广州地铁支持支付宝/微信乘车码，也可在站内机器买票。</li>
-        <li><strong>时间：</strong>页面所有时间均已转为 GMT+8，且倒计时基于绝对时间戳，跨国时区打开也不会错。</li>
-        <li><strong>夜间：</strong>凌晨落地如遇打车问题，T3 航站楼内有正规出租车和网约车区，不要上黑车。</li>
-    </ul>
+        <!-- 共同结尾 -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">晚上 (暂定)</div>
+                <div><strong>太古仓码头</strong> 沿江散步、小集市。</div>
+                <div class="text-sm">地铁8号线沙园站A口，步行约10分钟。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">22:30 - 23:30</div>
+                <div>回民宿取行李，23:30 前打车出发去白云机场 T3。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 待办清单 -->
+    <div class="card" id="todo">
+        <h2>To Do</h2>
+        <p class="text-sm" style="margin-bottom: 12px;">勾选状态保存在当前浏览器，办完请手动打钩。</p>
+        <ul id="todoList">
+            <li><label><input type="checkbox" data-id="1"> 抢 19 日广东省博物馆普通票 / 确认特展票</label></li>
+            <li><label><input type="checkbox" data-id="2"> 跟房东确认 17 日凌晨 2 点拿钥匙入住</label></li>
+            <li><label><input type="checkbox" data-id="3"> 携程用护照尝试预约南越王“墓室下层”免费票</label></li>
+            <li><label><input type="checkbox" data-id="4"> 准备马来西亚护照原件，现场买南越王 10 元门票</label></li>
+            <li><label><input type="checkbox" data-id="5"> 决定 19 日太古仓是否坐珠江夜游</label></li>
+            <li><label><input type="checkbox" data-id="6"> 确认 20 日凌晨去机场的网约车</label></li>
+        </ul>
+    </div>
+
+    <!-- 旅行前准备 -->
+    <div class="card" id="prep">
+        <h2>BEFORE WE GO</h2>
+        <h1 style="margin-bottom: 12px;">旅行前准备</h1>
+        <div class="prep-counter" id="prepCounter">0 / 0</div>
+        
+        <div class="prep-input-group">
+            <input type="text" id="prepInput" placeholder="添加一项准备事项">
+            <button onclick="addPrep()">添加</button>
+        </div>
+        
+        <ul class="prep-list" id="prepList">
+            <!-- 动态生成 -->
+        </ul>
+        <p class="text-sm" style="text-align: center; margin-top: 12px; opacity: 0.6;">列表仅保存在当前设备浏览器</p>
+    </div>
+
+    <!-- 实用贴士 -->
+    <div class="card">
+        <h2>实用贴士</h2>
+        <ul>
+            <li><strong>证件：</strong>马来西亚护照随身带，买票、入住、高铁均需原件。</li>
+            <li><strong>行李：</strong>19日退房后寄存在民宿，轻装去逛艺博院和太古仓。回程前记得去取。</li>
+            <li><strong>交通：</strong>广州地铁支持支付宝/微信乘车码。</li>
+            <li><strong>夜间：</strong>凌晨落地如遇打车问题，T3 航站楼内有正规出租车和网约车区。</li>
+        </ul>
+    </div>
+
 </div>
 
 <script>
-    // 自动昼夜切换 (18:00 - 06:00 为夜间)
+    // 自动昼夜切换
     function setTheme() {
         const hour = new Date().getHours();
         if (hour >= 18 || hour < 6) {
@@ -349,30 +503,28 @@
     setTheme();
     setInterval(setTheme, 60000);
 
-    // 展开折叠路线
-    function toggleRoute(id) {
+    // 地图与方案切换
+    function toggleMap(id) {
         const el = document.getElementById(id);
-        if (el.classList.contains('active')) {
-            el.classList.remove('active');
-        } else {
-            el.classList.add('active');
-        }
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+    function switchPlan(planId) {
+        document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.plan-tab').forEach(el => el.classList.remove('active'));
+        document.getElementById(planId).classList.add('active');
+        event.target.classList.add('active');
     }
 
-    // 倒计时逻辑
-    // 下一个目标事件：11月16日 22:40 航班起飞 (设为 GMT+8)
-    const targetDate = new Date('2026-11-16T22:40:00+08:00').getTime();
-    
-    // 如果当前时间已过起飞时间，则倒计时切换为下一个事件（如返程或入住）
-    // 为了页面永久可用，这里仅固定指向首个核心事件。
+    // 倒计时（修正为 2026 年）
+    const targetDate = new Date('2026-11-16T22:40:00+08:00').getTime(); 
     
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = targetDate - now;
 
         if (distance < 0) {
-            document.getElementById('nextEvent').innerText = "行程进行中或已结束";
-            document.getElementById('nextEventTime').innerText = "请享受你的广州之旅";
+            document.getElementById('nextEvent').innerText = "航班已起飞 / 行程进行中";
+            document.getElementById('nextEventTime').innerText = "享受广州之旅";
             document.getElementById('days').innerText = '0';
             document.getElementById('hours').innerText = '0';
             document.getElementById('minutes').innerText = '0';
@@ -392,9 +544,69 @@
         document.getElementById('minutes').innerText = minutes;
         document.getElementById('seconds').innerText = seconds;
     }
-    
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // To Do 勾选状态保存
+    const todoCheckboxes = document.querySelectorAll('#todoList input[type="checkbox"]');
+    todoCheckboxes.forEach(cb => {
+        const saved = localStorage.getItem('todo_' + cb.dataset.id);
+        if (saved === 'true') cb.checked = true;
+        
+        cb.addEventListener('change', () => {
+            localStorage.setItem('todo_' + cb.dataset.id, cb.checked);
+        });
+    });
+
+    // 旅行前准备逻辑
+    let prepItems = JSON.parse(localStorage.getItem('prepItems')) || [];
+
+    function renderPrep() {
+        const list = document.getElementById('prepList');
+        list.innerHTML = '';
+        let completed = 0;
+        
+        prepItems.forEach((item, index) => {
+            if (item.done) completed++;
+            
+            const li = document.createElement('li');
+            li.className = 'prep-item';
+            li.innerHTML = `
+                <label>
+                    <input type="checkbox" ${item.done ? 'checked' : ''} onchange="togglePrep(${index})">
+                    <span style="${item.done ? 'text-decoration: line-through; color: var(--text-muted);' : ''}">${item.text}</span>
+                </label>
+                <button class="prep-delete" onclick="deletePrep(${index})">删除</button>
+            `;
+            list.appendChild(li);
+        });
+        
+        document.getElementById('prepCounter').innerText = `${completed} / ${prepItems.length}`;
+        localStorage.setItem('prepItems', JSON.stringify(prepItems));
+    }
+
+    function addPrep() {
+        const input = document.getElementById('prepInput');
+        const text = input.value.trim();
+        if (text) {
+            prepItems.push({ text: text, done: false });
+            input.value = '';
+            renderPrep();
+        }
+    }
+
+    function togglePrep(index) {
+        prepItems[index].done = !prepItems[index].done;
+        renderPrep();
+    }
+
+    function deletePrep(index) {
+        prepItems.splice(index, 1);
+        renderPrep();
+    }
+
+    // 初始化渲染
+    renderPrep();
 </script>
 </body>
 </html>
