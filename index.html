@@ -115,6 +115,7 @@
         font-size: 0.85rem;
         margin: 12px 0;
         font-weight: 500;
+        line-height: 1.5;
     }
     .success-box {
         background-color: var(--success-bg);
@@ -359,7 +360,7 @@
                 </svg>
             </div>
             <div class="alert-box">
-                💡 若 17 号早上起不来，请果断切换至【方案 B】。如需对调，务必在 17 号早上操作携程：退 17 号王墓票，改约 18 号 14:00-15:00。
+                💡 若 17 号早上起不来，请果断切换至【方案 B】。<strong>如对调，必须重新预约 18 号的 10元大门票 + 墓室下层免费票！</strong>
             </div>
             <div class="timeline">
                 <div class="timeline-item">
@@ -404,8 +405,11 @@
                     <circle cx="250" cy="60" r="4" fill="var(--day1)"/><text x="255" y="65" class="map-label">珠江新城</text>
                 </svg>
             </div>
-            <div class="alert-box">
-                ⚠️ 执行本方案，你必须现在/明早去改签王墓门票到 18 号 14:00-15:00。
+            <div class="alert-box" style="border-left: 4px solid var(--alert-text);">
+                <strong>⚠️ 门票改期警报：</strong>执行本方案，你必须立刻去操作：<br>
+                1. 退掉 17 号的门票。<br>
+                2. <strong>重新预约 18 号 14:00 的 10元大门票！</strong><br>
+                3. <strong>重新预约 18 号 14:00 的墓室下层免费票！</strong>
             </div>
             <div class="timeline">
                 <div class="timeline-item">
@@ -499,8 +503,10 @@
                     <div class="time">14:00 - 15:00</div>
                     <div><strong>南越王博物院（王墓展区）</strong></div>
                     <div class="text-sm">地铁2号线越秀公园站E口。</div>
-                    <div class="success-box">
-                        ✅ 凭护照原件核验入馆。
+                    <div class="alert-box" style="margin-top: 8px;">
+                        ⚠️ <strong>需另外预约两张票：</strong><br>
+                        1. 10 元大门票<br>
+                        2. 墓室下层免费票
                     </div>
                     <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德</a>
                 </div>
@@ -602,7 +608,7 @@
         <h2>To Do</h2>
         <p class="text-sm" style="margin-bottom: 12px;">勾选状态保存在当前浏览器。</p>
         <ul id="todoList">
-            <li><label><input type="checkbox" data-id="1"> 视 17 号起床情况，决定是否需将王墓门票改期至 18 号</label></li>
+            <li><label><input type="checkbox" data-id="1"> 视 17 号起床情况，决定是否需将王墓门票改期至 18 号（<strong>若改期，需重约大门票+墓室下层</strong>）</label></li>
             <li><label><input type="checkbox" data-id="2"> 决定 19 日太古仓是否坐珠江夜游</label></li>
             <li><label><input type="checkbox" data-id="3"> 确认 20 日凌晨去机场的交通（若顺风车未接单则打网约车）</label></li>
             <li><label><input type="checkbox" data-id="4"> 整理行李，确认马来西亚护照原件带好</label></li>
