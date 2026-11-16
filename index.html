@@ -19,6 +19,8 @@
         --highlight-text: #856404;
         --water: #d4e6f1;
         --road: #ecf0f1;
+        --success-bg: #d4edda;
+        --success-text: #155724;
     }
     [data-theme="dark"] {
         --bg: #121212;
@@ -34,6 +36,8 @@
         --highlight-text: #ffd54f;
         --water: #1a2a3a;
         --road: #2a2a2a;
+        --success-bg: #1e3b26;
+        --success-text: #81c784;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -87,6 +91,15 @@
         font-size: 0.85rem;
         margin: 12px 0;
         border-left: 4px solid #ffc107;
+    }
+    .success-box {
+        background-color: var(--success-bg);
+        color: var(--success-text);
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        margin: 12px 0;
+        border-left: 4px solid #28a745;
     }
     
     /* 倒计时 */
@@ -262,26 +275,15 @@
         <h2>行程总览地图</h2>
         <div class="map-wrapper">
             <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <!-- 江河水系 (半透明) -->
                 <path d="M-20,100 C80,140 150,80 220,160 C280,220 350,180 420,220 L420,320 L-20,320 Z" fill="var(--water)" opacity="0.6"/>
                 <path d="M180,-20 C200,50 150,80 220,160" fill="none" stroke="var(--water)" stroke-width="15" opacity="0.6"/>
-                
-                <!-- 主要道路网格 -->
                 <path d="M50,50 L350,50 M100,100 L300,100 M50,150 L350,150 M50,200 L350,200" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/>
                 <path d="M100,20 L100,280 M200,20 L200,280 M300,20 L300,280" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/>
-
-                <!-- 地铁路线示意 -->
                 <path d="M80,20 L80,200 L250,200" fill="none" stroke="#ff9800" stroke-width="2" opacity="0.5"/>
                 <path d="M20,120 L380,120" fill="none" stroke="#f44336" stroke-width="2" opacity="0.5"/>
-
-                <!-- Day 1 (蓝) 越秀/天河 -->
                 <path d="M80,140 L150,100 L250,80" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
-                <!-- Day 2 (绿) 荔湾/海珠 -->
                 <path d="M120,160 L60,120 L100,180" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
-                <!-- Day 3 (紫) 珠江新城/海珠 -->
                 <path d="M250,80 L260,160 L150,240" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
-
-                <!-- 标记点 -->
                 <circle cx="80" cy="140" r="4" class="map-point" fill="var(--primary)"/><text x="85" y="145" class="map-label">民宿</text>
                 <circle cx="150" cy="100" r="4" class="map-point" fill="var(--day1)"/><text x="155" y="105" class="map-label">越秀公园</text>
                 <circle cx="250" cy="80" r="4" class="map-point" fill="var(--day1)"/><text x="255" y="85" class="map-label">体育西</text>
@@ -307,7 +309,7 @@
         </div>
         <hr style="border-top: 1px solid var(--border); margin: 12px 0;">
         <div>
-            <p style="color: var(--text-muted);"><strong>⏳ 未确认信息：</strong>接机顺风车（11月17日 02:30）目前尚未有车主接单，需持续关注。若无人接单，建议直接在机场打车。</p>
+            <p style="color: var(--text-muted);"><strong>⏳ 待确认：</strong>接机顺风车（11月17日 02:30）目前尚未有车主接单。若今晚仍无人接，建议直接取消，落地后去 T3 航站楼网约车区打车。</p>
         </div>
     </div>
 
@@ -348,9 +350,9 @@
                 <div class="time">下午</div>
                 <div><strong>南越王博物院（王墓展区）</strong></div>
                 <div class="text-sm">地铁2号线越秀公园站E口，步行5分钟。</div>
-                <div class="highlight-box">
-                    ⚠️ 持马来西亚护照：去人工窗口买 10 元大门票。<br>
-                    💡 携程预约了“墓室下层”免费票的话，现场凭护照核验。如核验失败，直接放弃下层，只看主墓和陈列。
+                <div class="success-box">
+                    ✅ 门票已搞定：大门票和墓室下层免费票均已预约成功。<br>
+                    🛂 现场请出示<strong>马来西亚护照原件</strong>进行核验。如遇下层系统核验失败，直接放弃下层，不影响主墓参观。
                 </div>
                 <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德导航</a>
             </div>
@@ -425,7 +427,7 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="time">08:30 - 11:15</div>
-                    <div><strong>广东省博物馆</strong>（凭特展票入馆）</div>
+                    <div><strong>广东省博物馆</strong>（普通票及特展票已约）</div>
                     <div class="text-sm">地铁5号线珠江新城站B1口，或APM线大剧院站E口。</div>
                 </div>
                 <div class="timeline-item">
@@ -458,7 +460,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="time">09:00 - 12:00</div>
-                    <div><strong>广东省博物馆</strong></div>
+                    <div><strong>广东省博物馆</strong>（普通票及特展票已约）</div>
                     <div class="text-sm">地铁5号线珠江新城站B1口。</div>
                 </div>
                 <div class="timeline-item">
@@ -491,12 +493,9 @@
         <h2>To Do</h2>
         <p class="text-sm" style="margin-bottom: 12px;">勾选状态保存在当前浏览器，办完请手动打钩。</p>
         <ul id="todoList">
-            <li><label><input type="checkbox" data-id="1"> 抢 19 日广东省博物馆普通票 / 确认特展票</label></li>
-            <li><label><input type="checkbox" data-id="2"> 跟房东确认 17 日凌晨 2 点拿钥匙入住</label></li>
-            <li><label><input type="checkbox" data-id="3"> 携程用护照尝试预约南越王“墓室下层”免费票</label></li>
-            <li><label><input type="checkbox" data-id="4"> 准备马来西亚护照原件，现场买南越王 10 元门票</label></li>
-            <li><label><input type="checkbox" data-id="5"> 决定 19 日太古仓是否坐珠江夜游</label></li>
-            <li><label><input type="checkbox" data-id="6"> 确认 20 日凌晨去机场的网约车</label></li>
+            <li><label><input type="checkbox" data-id="1"> 决定 19 日太古仓是否坐珠江夜游</label></li>
+            <li><label><input type="checkbox" data-id="2"> 确认 20 日凌晨去机场的交通（若顺风车未接单则打网约车）</label></li>
+            <li><label><input type="checkbox" data-id="3"> 整理行李，确认马来西亚护照原件带好</label></li>
         </ul>
     </div>
 
@@ -569,7 +568,6 @@
         }
     }
 
-    // WMO 天气代码 → 中文描述 + 图标
     const WMO = {
         0: { desc: '晴', icon: '☀️' }, 1: { desc: '大部晴朗', icon: '🌤️' },
         2: { desc: '多云', icon: '⛅' }, 3: { desc: '阴', icon: '☁️' },
@@ -583,7 +581,6 @@
         95: { desc: '雷暴', icon: '⛈️' }, 96: { desc: '雷暴伴冰雹', icon: '⛈️' }
     };
 
-    // 基于温度 + 降水的穿衣/带伞建议
     function getAdvice(tempMax, tempMin, precipProb) {
         let clothing = '';
         if (tempMax >= 25) clothing = '短袖 + 薄长裤';
@@ -602,7 +599,6 @@
         return `${clothing} ${umbrella}${diffNote}`;
     }
 
-    // 渲染天气 UI
     function updateWeatherUI(data) {
         const container = document.getElementById('weatherGrid');
         if (!container) return;
@@ -630,7 +626,6 @@
             `;
         });
         
-        // 更新下方建议文字（显示今天的具体建议）
         const adviceEl = document.getElementById('weatherAdvice');
         if (adviceEl && data.daily.time.length > 0) {
             const todayMax = Math.round(data.daily.temperature_2m_max[0]);
@@ -640,7 +635,6 @@
         }
     }
 
-    // 页面加载时拉取天气，之后每 30 分钟刷新一次
     fetchWeather();
     setInterval(fetchWeather, 30 * 60 * 1000);
 
