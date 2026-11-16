@@ -176,6 +176,7 @@
         margin-bottom: 16px;
         overflow: hidden;
         border: 1px solid var(--border);
+        display: none; /* 默认隐藏 */
     }
     svg { display: block; width: 100%; height: auto; }
     .map-label { font-size: 10px; fill: var(--text-muted); font-weight: 600; }
@@ -293,7 +294,7 @@
     <!-- 总览地图 -->
     <div class="card" id="routes">
         <h2>行程总览</h2>
-        <div class="map-wrapper" style="margin-top: 12px;">
+        <div class="map-wrapper" style="display: block; margin-top: 12px;">
             <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
                 <path d="M-20,100 C80,140 150,80 220,160 C280,220 350,180 420,220 L420,320 L-20,320 Z" fill="var(--water)" opacity="0.3"/>
                 <path d="M180,-20 C200,50 150,80 220,160" fill="none" stroke="var(--water)" stroke-width="15" opacity="0.3"/>
@@ -335,18 +336,9 @@
     
     <!-- ========== Day 1 ========== -->
     <div class="card day-1">
-        <div class="day-header" onclick="toggleMap('map1')">
+        <div class="day-header" onclick="toggleCurrentMap(this)">
             <span class="day-title">Day 1：11月17日（周二）</span>
-            <span class="text-sm" style="color:var(--day1)">展开地图 ▾</span>
-        </div>
-        <div id="map1" class="map-wrapper" style="display:none;">
-            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-                <rect width="300" height="150" fill="transparent"/>
-                <path d="M50,120 L100,70 L220,50" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
-                <circle cx="100" cy="70" r="4" fill="var(--day1)"/><text x="105" y="75" class="map-label">越秀/荔湾</text>
-                <circle cx="220" cy="50" r="4" fill="var(--day1)"/><text x="225" y="55" class="map-label">体育西</text>
-            </svg>
+            <span class="text-sm" style="color:var(--day1)">展开当前地图 ▾</span>
         </div>
 
         <div class="plan-tabs">
@@ -356,6 +348,16 @@
 
         <!-- Day 1 方案 A -->
         <div id="d1-planA" class="plan-content active">
+            <!-- 方案A地图 -->
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="150" fill="transparent"/>
+                    <path d="M50,120 L100,70 L220,50" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                    <circle cx="100" cy="70" r="4" fill="var(--day1)"/><text x="105" y="75" class="map-label">越秀公园</text>
+                    <circle cx="220" cy="50" r="4" fill="var(--day1)"/><text x="225" y="55" class="map-label">体育西</text>
+                </svg>
+            </div>
             <div class="alert-box">
                 💡 若 17 号早上起不来，请果断切换至【方案 B】。如需对调，务必在 17 号早上操作携程：退 17 号王墓票，改约 18 号 14:00-15:00。
             </div>
@@ -390,6 +392,18 @@
 
         <!-- Day 1 方案 B (对调) -->
         <div id="d1-planB" class="plan-content">
+            <!-- 方案B地图 -->
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="150" fill="transparent"/>
+                    <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.3"/>
+                    <path d="M50,120 L80,80 L120,100 L250,60" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                    <circle cx="80" cy="80" r="4" fill="var(--day1)"/><text x="85" y="85" class="map-label">沙面</text>
+                    <circle cx="120" cy="100" r="4" fill="var(--day1)"/><text x="125" y="105" class="map-label">永庆坊</text>
+                    <circle cx="250" cy="60" r="4" fill="var(--day1)"/><text x="255" y="65" class="map-label">珠江新城</text>
+                </svg>
+            </div>
             <div class="alert-box">
                 ⚠️ 执行本方案，你必须现在/明早去改签王墓门票到 18 号 14:00-15:00。
             </div>
@@ -422,19 +436,9 @@
 
     <!-- ========== Day 2 ========== -->
     <div class="card day-2">
-        <div class="day-header" onclick="toggleMap('map2')">
+        <div class="day-header" onclick="toggleCurrentMap(this)">
             <span class="day-title">Day 2：11月18日（周三）</span>
-            <span class="text-sm" style="color:var(--day2)">展开地图 ▾</span>
-        </div>
-        <div id="map2" class="map-wrapper" style="display:none;">
-            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-                <rect width="300" height="150" fill="transparent"/>
-                <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.3"/>
-                <path d="M80,80 L120,100 L250,60" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="80" cy="80" r="4" fill="var(--day2)"/><text x="85" y="85" class="map-label">沙面</text>
-                <circle cx="120" cy="100" r="4" fill="var(--day2)"/><text x="125" y="105" class="map-label">永庆坊</text>
-                <circle cx="250" cy="60" r="4" fill="var(--day2)"/><text x="255" y="65" class="map-label">珠江新城</text>
-            </svg>
+            <span class="text-sm" style="color:var(--day2)">展开当前地图 ▾</span>
         </div>
 
         <div class="plan-tabs">
@@ -444,6 +448,18 @@
 
         <!-- Day 2 方案 A -->
         <div id="d2-planA" class="plan-content active">
+            <!-- 方案A地图 -->
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="150" fill="transparent"/>
+                    <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.3"/>
+                    <path d="M50,120 L80,80 L120,100 L250,60" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                    <circle cx="80" cy="80" r="4" fill="var(--day2)"/><text x="85" y="85" class="map-label">沙面</text>
+                    <circle cx="120" cy="100" r="4" fill="var(--day2)"/><text x="125" y="105" class="map-label">永庆坊</text>
+                    <circle cx="250" cy="60" r="4" fill="var(--day2)"/><text x="255" y="65" class="map-label">珠江新城</text>
+                </svg>
+            </div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="time">上午</div>
@@ -468,6 +484,16 @@
 
         <!-- Day 2 方案 B (对调) -->
         <div id="d2-planB" class="plan-content">
+            <!-- 方案B地图 -->
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="150" fill="transparent"/>
+                    <path d="M50,120 L100,70 L220,50" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                    <circle cx="100" cy="70" r="4" fill="var(--day2)"/><text x="105" y="75" class="map-label">越秀公园</text>
+                    <circle cx="220" cy="50" r="4" fill="var(--day2)"/><text x="225" y="55" class="map-label">体育西</text>
+                </svg>
+            </div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="time">14:00 - 15:00</div>
@@ -490,15 +516,27 @@
 
     <!-- ========== Day 3 ========== -->
     <div class="card day-3">
-        <div class="day-header">
+        <div class="day-header" onclick="toggleCurrentMap(this)">
             <span class="day-title">Day 3：11月19日（周四）</span>
+            <span class="text-sm" style="color:var(--day3)">展开当前地图 ▾</span>
         </div>
+        
         <div class="plan-tabs">
             <div class="plan-tab active" onclick="switchPlan('d3-planA', this)">方案 A (早省博)</div>
             <div class="plan-tab" onclick="switchPlan('d3-planB', this)">方案 B (早起退房)</div>
         </div>
         
         <div id="d3-planA" class="plan-content active">
+            <!-- 方案A地图 -->
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="120" fill="transparent"/>
+                    <path d="M50,60 L150,40 L200,90" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="60" r="4" fill="var(--primary)"/><text x="55" y="65" class="map-label">民宿</text>
+                    <circle cx="150" cy="40" r="4" fill="var(--day3)"/><text x="155" y="45" class="map-label">省博</text>
+                    <circle cx="200" cy="90" r="4" fill="var(--day3)"/><text x="205" y="95" class="map-label">艺博/太古仓</text>
+                </svg>
+            </div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="time">08:30 - 11:15</div>
@@ -519,6 +557,16 @@
         </div>
 
         <div id="d3-planB" class="plan-content">
+            <!-- 方案B地图 -->
+            <div class="map-wrapper">
+                <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="120" fill="transparent"/>
+                    <path d="M50,60 L150,40 L200,90" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="60" r="4" fill="var(--primary)"/><text x="55" y="65" class="map-label">退房后出发</text>
+                    <circle cx="150" cy="40" r="4" fill="var(--day3)"/><text x="155" y="45" class="map-label">省博</text>
+                    <circle cx="200" cy="90" r="4" fill="var(--day3)"/><text x="205" y="95" class="map-label">艺博/太古仓</text>
+                </svg>
+            </div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="time">08:30 - 09:00</div>
@@ -591,21 +639,29 @@
     setTheme();
     setInterval(setTheme, 60000);
 
-    // 地图与方案切换
-    function toggleMap(id) {
-        const el = document.getElementById(id);
-        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    // 展开/收起当前方案的地图
+    function toggleCurrentMap(headerEl) {
+        const card = headerEl.closest('.card');
+        const activePlan = card.querySelector('.plan-content.active');
+        if (activePlan) {
+            const map = activePlan.querySelector('.map-wrapper');
+            if (map) {
+                map.style.display = map.style.display === 'none' ? 'block' : 'none';
+            }
+        }
     }
     
-    // 支持多组 Tab 切换
+    // Tab 切换器
     function switchPlan(planId, tabEl) {
-        // 找到属于同一个卡片的 tabs 和 contents
         const card = tabEl.closest('.card');
         card.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
         card.querySelectorAll('.plan-tab').forEach(el => el.classList.remove('active'));
         
         document.getElementById(planId).classList.add('active');
         tabEl.classList.add('active');
+        
+        // 切换方案时，默认收起新方案的地图（避免突然撑开页面）
+        card.querySelectorAll('.map-wrapper').forEach(map => map.style.display = 'none');
     }
 
     // ====== 实时天气模块（Open-Meteo） ======
