@@ -185,6 +185,7 @@
     .day-2 .day-title { color: var(--day2); }
     .day-3 .day-title { color: var(--day3); }
     
+    /* 仅 Day 3 保留 Tab */
     .plan-tabs { 
         display: flex; gap: 4px; margin-bottom: 16px; 
         background: rgba(150,150,150,0.1); padding: 4px; border-radius: 10px;
@@ -285,14 +286,15 @@
                 <path d="M50,50 L350,50 M100,100 L300,100 M50,150 L350,150 M50,200 L350,200" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/>
                 <path d="M100,20 L100,280 M200,20 L200,280 M300,20 L300,280" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/>
                 
-                <path d="M80,140 L150,100 L250,80" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
-                <path d="M120,160 L60,120 L100,180" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M120,160 L60,120 L100,180" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M80,140 L150,100 L180,80 L250,80" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
                 <path d="M250,80 L260,160 L150,240" fill="none" stroke="var(--day3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
                 
                 <circle cx="80" cy="140" r="4" class="map-point" fill="var(--primary)"/><text x="85" y="145" class="map-label">民宿</text>
-                <circle cx="150" cy="100" r="4" class="map-point" fill="var(--day1)"/><text x="155" y="105" class="map-label">越秀</text>
-                <circle cx="250" cy="80" r="4" class="map-point" fill="var(--day1)"/><text x="255" y="85" class="map-label">体育西</text>
-                <circle cx="60" cy="120" r="4" class="map-point" fill="var(--day2)"/><text x="65" y="115" class="map-label">荔湾</text>
+                <circle cx="60" cy="120" r="4" class="map-point" fill="var(--day1)"/><text x="65" y="115" class="map-label">荔湾</text>
+                <circle cx="150" cy="100" r="4" class="map-point" fill="var(--day2)"/><text x="155" y="105" class="map-label">王墓</text>
+                <circle cx="180" cy="80" r="4" class="map-point" fill="var(--day2)"/><text x="185" y="75" class="map-label">王宫/大佛寺</text>
+                <circle cx="250" cy="80" r="4" class="map-point" fill="var(--day2)"/><text x="255" y="85" class="map-label">体育西</text>
                 <circle cx="260" cy="160" r="4" class="map-point" fill="var(--day3)"/><text x="265" y="165" class="map-label">省博</text>
                 <circle cx="150" cy="240" r="4" class="map-point" fill="var(--day3)"/><text x="155" y="245" class="map-label">太古仓</text>
             </svg>
@@ -316,201 +318,118 @@
 
     <h2 style="margin: 24px 0 12px 4px;" id="itinerary">逐日行程</h2>
     
+    <!-- ========== Day 1 (纯休息+荔湾) ========== -->
     <div class="card day-1">
         <div class="day-header" onclick="toggleCurrentMap(this)">
             <span class="day-title">Day 1：11月17日（周二）</span>
             <span class="text-sm" style="color:var(--day1)">展开当前地图 ▾</span>
         </div>
 
-        <div class="plan-tabs">
-            <div class="plan-tab active" onclick="switchPlan('d1-planA', this)">方案 A：原计划</div>
-            <div class="plan-tab" onclick="switchPlan('d1-planB', this)">方案 B：起不来对调</div>
+        <div class="map-wrapper">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <rect width="300" height="150" fill="transparent"/>
+                <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.3"/>
+                <path d="M50,120 L80,80 L120,100 L250,60" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                <circle cx="80" cy="80" r="4" fill="var(--day1)"/><text x="85" y="85" class="map-label">沙面</text>
+                <circle cx="120" cy="100" r="4" fill="var(--day1)"/><text x="125" y="105" class="map-label">永庆坊</text>
+                <circle cx="250" cy="60" r="4" fill="var(--day1)"/><text x="255" y="65" class="map-label">珠江新城</text>
+            </svg>
         </div>
 
-        <div id="d1-planA" class="plan-content active">
-            <div class="map-wrapper">
-                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="300" height="150" fill="transparent"/>
-                    <path d="M50,120 L100,70 L150,90 L220,50" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
-                    <circle cx="100" cy="70" r="4" fill="var(--day1)"/><text x="105" y="75" class="map-label">王墓</text>
-                    <circle cx="150" cy="90" r="4" fill="var(--day1)"/><text x="155" y="95" class="map-label">大佛寺</text>
-                    <circle cx="220" cy="50" r="4" fill="var(--day1)"/><text x="225" y="55" class="map-label">体育西</text>
-                </svg>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">02:00 落地</div>
+                <div>白云机场 T3 打车回民宿。去附近 24 小时<strong>旺我便利店</strong>买水。</div>
+                <a href="https://uri.amap.com/search?keyword=旺我便利店&callnative=1" class="location-btn">📍 旺我便利店</a>
             </div>
-            <div class="alert-box">
-                💡 若 17 号早上起不来，请果断切换至【方案 B】。<strong>如对调，必须重新预约 18 号的 10元大门票 + 墓室下层免费票！</strong>
+            <div class="timeline-item">
+                <div class="time">11:00 - 12:00 自然醒</div>
+                <div>去附近<strong>美士联便利店</strong>拿快递。</div>
+                <a href="https://uri.amap.com/search?keyword=美士联便利店&callnative=1" class="location-btn">📍 美士联便利店</a>
             </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="time">02:00 落地</div>
-                    <div>白云机场 T3 打车回民宿。去附近 24 小时<strong>旺我便利店</strong>买水。</div>
-                    <a href="https://uri.amap.com/search?keyword=旺我便利店&callnative=1" class="location-btn">📍 旺我便利店</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">11:00 - 12:00 自然醒</div>
-                    <div>去附近<strong>美士联便利店</strong>拿快递。</div>
-                    <a href="https://uri.amap.com/search?keyword=美士联便利店&callnative=1" class="location-btn">📍 美士联便利店</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">14:00 - 15:00</div>
-                    <div><strong>南越王博物院（王墓展区）</strong></div>
-                    <div class="text-sm">地铁2号线越秀公园站E口。</div>
-                    <div class="success-box">
-                        ✅ 门票已约（大门票 + 14:00 墓室下层）。凭护照原件核验。
-                    </div>
-                    <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">19:00 - 20:30</div>
-                    <div><strong>大佛寺（看亮灯夜景）</strong></div>
-                    <div class="text-sm">地铁1/2号线公园前站D口，或6号线北京路站B口。免费入内。</div>
-                    <div class="alert-box" style="margin-top: 8px;">
-                        🏮 <strong>19:00 亮灯，21:00 停止入场。</strong>建议 19:00 左右到，金光璀璨最出片。入寺着装得体，避免短裙吊带。
-                    </div>
-                    <a href="https://uri.amap.com/search?keyword=大佛寺&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">20:30 之后</div>
-                    <div><strong>Fat Boi Cocktail Bar</strong></div>
-                    <div class="text-sm">从大佛寺坐地铁1号线到体育西路站A口，步行约750米。</div>
-                    <a href="https://uri.amap.com/search?keyword=FatBoiCocktailBar&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
+            <div class="timeline-item">
+                <div class="time">下午</div>
+                <div><strong>沙面岛</strong>（露天街区）</div>
+                <div class="text-sm">地铁1/6号线黄沙站F口。</div>
+                <a href="https://uri.amap.com/search?keyword=沙面岛&callnative=1" class="location-btn">📍 唤起高德</a>
             </div>
-        </div>
-
-        <div id="d1-planB" class="plan-content">
-            <div class="map-wrapper">
-                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="300" height="150" fill="transparent"/>
-                    <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.3"/>
-                    <path d="M50,120 L80,80 L120,100 L250,60" fill="none" stroke="var(--day1)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
-                    <circle cx="80" cy="80" r="4" fill="var(--day1)"/><text x="85" y="85" class="map-label">沙面</text>
-                    <circle cx="120" cy="100" r="4" fill="var(--day1)"/><text x="125" y="105" class="map-label">永庆坊</text>
-                    <circle cx="250" cy="60" r="4" fill="var(--day1)"/><text x="255" y="65" class="map-label">珠江新城</text>
-                </svg>
+            <div class="timeline-item">
+                <div class="time">傍晚</div>
+                <div><strong>永庆坊</strong>（西关老街区）</div>
+                <div class="text-sm">地铁1/6号线黄沙站B口，步行10分钟。</div>
+                <a href="https://uri.amap.com/search?keyword=永庆坊&callnative=1" class="location-btn">📍 唤起高德</a>
             </div>
-            <div class="alert-box" style="border-left: 4px solid var(--alert-text);">
-                <strong>⚠️ 门票改期警报：</strong>执行本方案，你必须立刻去操作：<br>
-                1. 退掉 17 号的门票。<br>
-                2. <strong>重新预约 18 号 14:00 的 10元大门票！</strong><br>
-                3. <strong>重新预约 18 号 14:00 的墓室下层免费票！</strong>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="time">02:00 落地</div>
-                    <div>白云机场 T3 打车回民宿。去附近<strong>旺我便利店</strong>买水。</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">下午 自然醒</div>
-                    <div>去<strong>美士联便利店</strong>拿快递，然后去<strong>沙面岛</strong>（露天街区）。</div>
-                    <div class="text-sm">地铁1/6号线黄沙站F口。</div>
-                    <a href="https://uri.amap.com/search?keyword=沙面岛&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">傍晚</div>
-                    <div><strong>永庆坊</strong>（西关老街区）</div>
-                    <div class="text-sm">地铁1/6号线黄沙站B口，步行10分钟。</div>
-                    <a href="https://uri.amap.com/search?keyword=永庆坊&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">晚上 20:00+</div>
-                    <div><strong>Bricklane</strong></div>
-                    <div class="text-sm">地铁3/5号线珠江新城站B1口，步行800米。</div>
-                    <a href="https://uri.amap.com/search?keyword=Bricklane珠江新城&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
+            <div class="timeline-item">
+                <div class="time">晚上 20:00+</div>
+                <div><strong>Bricklane</strong></div>
+                <div class="text-sm">地铁3/5号线珠江新城站B1口，步行800米。</div>
+                <a href="https://uri.amap.com/search?keyword=Bricklane珠江新城&callnative=1" class="location-btn">📍 唤起高德</a>
             </div>
         </div>
     </div>
 
+    <!-- ========== Day 2 (王宫+王墓+大佛寺) ========== -->
     <div class="card day-2">
         <div class="day-header" onclick="toggleCurrentMap(this)">
             <span class="day-title">Day 2：11月18日（周三）</span>
             <span class="text-sm" style="color:var(--day2)">展开当前地图 ▾</span>
         </div>
 
-        <div class="plan-tabs">
-            <div class="plan-tab active" onclick="switchPlan('d2-planA', this)">方案 A：原计划</div>
-            <div class="plan-tab" onclick="switchPlan('d2-planB', this)">方案 B：对调去王墓</div>
+        <div class="map-wrapper">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <rect width="300" height="150" fill="transparent"/>
+                <path d="M50,120 L80,60 L110,60 L130,80 L220,50" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
+                <circle cx="80" cy="60" r="4" fill="var(--day2)"/><text x="65" y="50" class="map-label">王宫</text>
+                <circle cx="110" cy="60" r="4" fill="var(--day2)"/><text x="115" y="55" class="map-label">大佛寺</text>
+                <circle cx="130" cy="80" r="4" fill="var(--day2)"/><text x="135" y="85" class="map-label">王墓</text>
+                <circle cx="220" cy="50" r="4" fill="var(--day2)"/><text x="225" y="55" class="map-label">体育西</text>
+            </svg>
         </div>
 
-        <div id="d2-planA" class="plan-content active">
-            <div class="map-wrapper">
-                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="300" height="150" fill="transparent"/>
-                    <path d="M0,80 Q150,120 300,80" fill="none" stroke="var(--water)" stroke-width="20" opacity="0.3"/>
-                    <path d="M50,120 L80,80 L120,100 L250,60" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
-                    <circle cx="80" cy="80" r="4" fill="var(--day2)"/><text x="85" y="85" class="map-label">沙面</text>
-                    <circle cx="120" cy="100" r="4" fill="var(--day2)"/><text x="125" y="105" class="map-label">永庆坊</text>
-                    <circle cx="250" cy="60" r="4" fill="var(--day2)"/><text x="255" y="65" class="map-label">珠江新城</text>
-                </svg>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">上午 自然醒</div>
+                <div><strong>南越王博物院（王宫展区）</strong></div>
+                <div class="text-sm">地铁1/2号线公园前站E口。</div>
+                <div class="success-box">
+                    ✅ 门票已约。凭护照原件核验。
+                </div>
+                <a href="https://uri.amap.com/search?keyword=南越王博物院王宫展区&callnative=1" class="location-btn">📍 唤起高德</a>
             </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="time">上午</div>
-                    <div><strong>沙面岛</strong></div>
-                    <div class="text-sm">地铁1/6号线黄沙站F口。</div>
-                    <a href="https://uri.amap.com/search?keyword=沙面岛&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">下午</div>
-                    <div><strong>永庆坊</strong></div>
-                    <div class="text-sm">地铁1/6号线黄沙站B口，步行10分钟。</div>
-                    <a href="https://uri.amap.com/search?keyword=永庆坊&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">傍晚 20:00+</div>
-                    <div><strong>Bricklane</strong></div>
-                    <div class="text-sm">地铁3/5号线珠江新城站B1口，步行800米。</div>
-                    <a href="https://uri.amap.com/search?keyword=Bricklane珠江新城&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
+            <div class="timeline-item">
+                <div class="time">中午</div>
+                <div>在公园前/北京路附近吃午饭。</div>
             </div>
-        </div>
-
-        <div id="d2-planB" class="plan-content">
-            <div class="map-wrapper">
-                <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="300" height="150" fill="transparent"/>
-                    <path d="M50,120 L100,70 L150,90 L220,50" fill="none" stroke="var(--day2)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="120" r="4" fill="var(--primary)"/><text x="55" y="125" class="map-label">民宿</text>
-                    <circle cx="100" cy="70" r="4" fill="var(--day2)"/><text x="105" y="75" class="map-label">王墓</text>
-                    <circle cx="150" cy="90" r="4" fill="var(--day2)"/><text x="155" y="95" class="map-label">大佛寺</text>
-                    <circle cx="220" cy="50" r="4" fill="var(--day2)"/><text x="225" y="55" class="map-label">体育西</text>
-                </svg>
+            <div class="timeline-item">
+                <div class="time">14:00 - 15:00</div>
+                <div><strong>南越王博物院（王墓展区）</strong></div>
+                <div class="text-sm">地铁2号线越秀公园站E口。</div>
+                <div class="success-box">
+                    ✅ 门票已约（大门票 + 14:00 墓室下层）。凭护照原件核验。
+                </div>
+                <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德</a>
             </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="time">14:00 - 15:00</div>
-                    <div><strong>南越王博物院（王墓展区）</strong></div>
-                    <div class="text-sm">地铁2号线越秀公园站E口。</div>
-                    <div class="alert-box" style="margin-top: 8px;">
-                        ⚠️ <strong>需另外预约两张票：</strong><br>
-                        1. 10 元大门票<br>
-                        2. 墓室下层免费票
-                    </div>
-                    <a href="https://uri.amap.com/search?keyword=南越王博物院王墓展区&callnative=1" class="location-btn">📍 唤起高德</a>
+            <div class="timeline-item">
+                <div class="time">19:00 - 20:30</div>
+                <div><strong>大佛寺（看亮灯夜景）</strong></div>
+                <div class="text-sm">地铁1/2号线公园前站D口，或6号线北京路站B口。免费入内。</div>
+                <div class="alert-box" style="margin-top: 8px;">
+                    🏮 <strong>19:00 亮灯，21:00 停止入场。</strong>建议 19:00 左右到，金光璀璨最出片。入寺着装得体，避免短裙吊带。
                 </div>
-                <div class="timeline-item">
-                    <div class="time">19:00 - 20:30</div>
-                    <div><strong>大佛寺（看亮灯夜景）</strong></div>
-                    <div class="text-sm">地铁1/2号线公园前站D口，或6号线北京路站B口。</div>
-                    <div class="alert-box" style="margin-top: 8px;">
-                        🏮 <strong>19:00 亮灯。</strong>王墓结束后可步行或坐一站地铁到北京路吃晚饭，然后刚好赶上亮灯。
-                    </div>
-                    <a href="https://uri.amap.com/search?keyword=大佛寺&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">20:30 之后</div>
-                    <div><strong>Fat Boi Cocktail Bar</strong></div>
-                    <div class="text-sm">地铁1号线公园前站到体育西路站A口。</div>
-                    <a href="https://uri.amap.com/search?keyword=FatBoiCocktailBar&callnative=1" class="location-btn">📍 唤起高德</a>
-                </div>
+                <a href="https://uri.amap.com/search?keyword=大佛寺&callnative=1" class="location-btn">📍 唤起高德</a>
+            </div>
+            <div class="timeline-item">
+                <div class="time">20:30 之后</div>
+                <div><strong>Fat Boi Cocktail Bar</strong></div>
+                <div class="text-sm">从大佛寺坐地铁1号线到体育西路站A口，步行约750米。</div>
+                <a href="https://uri.amap.com/search?keyword=FatBoiCocktailBar&callnative=1" class="location-btn">📍 唤起高德</a>
             </div>
         </div>
     </div>
 
+    <!-- ========== Day 3 (省博/艺博) ========== -->
     <div class="card day-3">
         <div class="day-header" onclick="toggleCurrentMap(this)">
             <span class="day-title">Day 3：11月19日（周四）</span>
@@ -595,11 +514,10 @@
         <h2>To Do</h2>
         <p class="text-sm" style="margin-bottom: 12px;">勾选状态保存在当前浏览器。</p>
         <ul id="todoList">
-            <li><label><input type="checkbox" data-id="1"> 视 17 号起床情况，决定是否需将王墓门票改期至 18 号（<strong>若改期，需重约大门票+墓室下层</strong>）</label></li>
-            <li><label><input type="checkbox" data-id="2"> 决定 19 日太古仓是否坐珠江夜游</label></li>
-            <li><label><input type="checkbox" data-id="3"> 确认 20 日凌晨去机场的交通（若顺风车未接单则打网约车）</label></li>
-            <li><label><input type="checkbox" data-id="4"> 整理行李，确认马来西亚护照原件带好</label></li>
-            <li><label><input type="checkbox" data-id="5"> 去大佛寺当晚，穿有袖上衣和过膝裤/裙（入寺着装要求）</label></li>
+            <li><label><input type="checkbox" data-id="1"> 决定 19 日太古仓是否坐珠江夜游</label></li>
+            <li><label><input type="checkbox" data-id="2"> 确认 20 日凌晨去机场的交通（若顺风车未接单则打网约车）</label></li>
+            <li><label><input type="checkbox" data-id="3"> 整理行李，确认马来西亚护照原件带好</label></li>
+            <li><label><input type="checkbox" data-id="4"> 去大佛寺当晚（18号），穿有袖上衣和过膝裤/裙（入寺着装要求）</label></li>
         </ul>
     </div>
 
@@ -633,8 +551,14 @@
     function toggleCurrentMap(headerEl) {
         const card = headerEl.closest('.card');
         const activePlan = card.querySelector('.plan-content.active');
+        // 如果卡片里有 plan-content（如Day 3），则控制当前激活的；否则控制默认的地图
         if (activePlan) {
             const map = activePlan.querySelector('.map-wrapper');
+            if (map) {
+                map.style.display = map.style.display === 'none' ? 'block' : 'none';
+            }
+        } else {
+            const map = card.querySelector('.map-wrapper');
             if (map) {
                 map.style.display = map.style.display === 'none' ? 'block' : 'none';
             }
